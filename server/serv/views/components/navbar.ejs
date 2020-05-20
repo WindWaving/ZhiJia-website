@@ -1,0 +1,76 @@
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light d-nav">
+    <h1 class="d-navbar-title">ZHIJIA后台管理系统</h1>
+    <!-- Left navbar links -->
+    <ul class="navbar-nav d-nav-ul">
+        <li class="nav-item d-none d-sm-inline-block d-nav-item">
+            <a href="/admin" class="nav-link d-nav-link">首页</a>
+        </li>
+        <% if(!admin){ %>
+        <li class="nav-item d-none d-sm-inline-block d-nav-item">
+            <a href="/admin/logname" class="nav-link d-nav-link">登录</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block d-nav-item">
+            <a href="/admin/register" class="nav-link d-nav-link">注册</a>
+        </li>
+        <% }else{ %>
+        <li class="nav-item d-none d-sm-inline-block d-nav-item">
+            <a class="nav-link d-nav-link" href="/admin/addproduct">发布产品</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block d-nav-item">
+            <span class="nav-link d-nav-link"><%= admin %></span>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block d-nav-item">
+            <a class="nav-link d-nav-link" onclick="onLogout()">登出</a>
+        </li>
+        <% } %>
+    </ul>
+</nav>
+
+<style>
+    .d-nav {
+        margin: 0 !important;
+        background: black;
+        padding: 1rem 3rem;
+        position: relative;
+        box-shadow: 0 3px 5px black;
+        border: none;
+    }
+
+    .d-navbar-title {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 2rem;
+    }
+
+    .d-nav-ul {
+        position: absolute;
+        right: 3rem;
+    }
+
+    .d-nav-ul .d-nav-item {
+        padding: 0 10px;
+    }
+
+    .d-nav-item .d-nav-link {
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+</style>
+
+<script>
+    const adminUrl = 'http://localhost:3000/admin/'
+    const serverUrl = 'http://localhost:3000/api/'
+	// const adminUrl = 'http://47.99.183.205:3030/admin/'
+    // const serverUrl = 'http://47.99.183.205:3030/api/'
+    onLogout = () => {
+        if (confirm('登出将不能正常访问网站，确认登出吗？')) {
+            $.ajax({
+                url: serverUrl + 'admin/logout',
+                method: 'get'
+            }).done(data => {
+                alert("成功登出，即将回到首页...")
+                window.location.href = adminUrl;
+            })
+        }
+
+    }
+</script>

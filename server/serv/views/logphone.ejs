@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>登录</title>
+    <link rel="stylesheet" href="/stylesheets/adminlte.min.css">
+    <link rel="stylesheet" href='/stylesheets/style.css'>
+</head>
+
+<body class="d-body">
+    <form class="ml-3 d-form">
+        <input id="phone" class="form-control d-input" type="number" placeholder="手机号" aria-label="phone">
+        <a class="d-link">发送验证码</a>
+        <input id="authcode" class="form-control d-input" type="text" placeholder="验证码" aria-label="authcode">
+        <button class="d-button" onclick="return onLogin()">登录</button>
+        <a href="/admin/logname" class="d-link" style="margin-top:1rem">密码登录</a>
+        <span style="margin-top: 1rem;">还没有注册，点击<a href="/admin/register" class="d-link">注册</a></span>
+    </form>
+</body>
+<script>
+    const serverUrl='<%= serverUrl %>'
+    const adminUrl='<%= adminUrl %>'
+    function onLogin() {
+        var phone = $("#phone").val();
+        var authcode = $("#authcode").val();
+        $.ajax({
+            url: serverUrl + 'admin/logbyphone',
+            data: {
+                phone:phone
+            },
+            method: "POST",
+        }).done(data => {
+            let { err, info } = data
+            if (!err) {
+                alert("登录成功，即将跳转首页...")
+                window.location.href = adminUrl;
+            } else {
+                alert(info)
+            }
+
+        })
+        return false
+    }
+</script>
+
+</html>

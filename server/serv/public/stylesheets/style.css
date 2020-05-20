@@ -1,0 +1,56 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #2383ea;
+}
+a:hover{
+  cursor: pointer;
+}
+.d-container{
+  display: flex;
+  min-height: 100vh;
+}
+.d-content{
+  flex: 1;
+  padding:3rem;
+  background: #f1f1f1;
+}
+.d-link{
+  color:#2383ea !important;
+}
+.d-link:hover{
+  text-decoration: underline !important;
+}
+.d-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+.d-input{
+  border-right-width: 1px;
+  width:20rem;
+  margin: 1rem auto;
+}
+.d-input:hover{
+  background: rgba(0,0,0,0.1);
+}
+
+.d-button{
+  background: #2383ea;
+  color: white;
+  padding:.5rem 1.8rem;
+  border:none;
+  box-shadow: 0 0 5px #2383ea;
+  transition: .5s ease;
+  margin-top: 2.5rem;
+}
+.d-button:hover{
+  box-shadow: none;
+}
+
+
+

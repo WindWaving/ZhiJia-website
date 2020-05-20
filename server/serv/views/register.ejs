@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>注册</title>
+    <link rel="stylesheet" href="/stylesheets/adminlte.min.css">
+    <link rel="stylesheet" href='/stylesheets/style.css'>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body class="d-body">
+    <form class="ml-3 d-form">
+        <input class="form-control form-control-navbar d-input" type="number" placeholder="手机号" aria-label="phone"
+            name="phone" id="phone">
+        <a class="d-link">发送验证码</a>
+        <input class="form-control form-control-navbar d-input" type="number" placeholder="验证码" aria-label="authcode"
+            name="authcode" id="authcode">
+        <input class="form-control form-control-navbar d-input" type="text" placeholder="用户名" aria-label="username"
+            name="username" id="username">
+        <input class="form-control form-control-navbar d-input" type="text" placeholder="密码" aria-label="password"
+            name="password" id="password">
+        <button type="button" class="d-button" onclick="return onRegister()">注册</button>
+        <span style="margin-top: 1rem;">已有账号，<a href="/admin/logname" class="d-link">登录</a></span>
+    </form>
+</body>
+<script>
+    const serverUrl='<%= serverUrl %>'
+    const adminUrl='<%= adminUrl %>'
+    onRegister=()=>{
+        var user = $("#username").val();
+        var pwd = $("#password").val();
+        var phone = $('#phone').val();
+        $.ajax({
+            url: serverUrl+'admin/register',
+            data: {
+                username: user,
+                password: pwd,
+                phone:phone
+            },
+            method: "POST",
+        }).done(data=>{
+            let {err,info}=data
+            if(!err){
+                alert("注册成功，即将跳转首页...")
+                window.location.href=adminUrl;
+            }else{
+                alert(info)
+            }
+
+        })
+        return false
+    }
+</script>
+
+</html>

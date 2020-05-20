@@ -1,0 +1,84 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4 d-aside">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+      <span class="brand-text font-weight-light">ZHIJIA</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+          <li class="nav-item has-treeview menu-open  d-treeview">
+            <a href="#" class="nav-link active d-dropdown">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <!-- <i class="nav-icon fas fa-th"></i> -->
+              <p>
+                产品管理
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav d-dropmenu">
+              <li class="nav-item d-item">
+                <a href="/admin/product/SmartHome" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>智能家居</p>
+                </a>
+              </li>
+              <li class="nav-item d-item">
+                <a href="/admin/product/SmartCommutity" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>智慧社区</p>
+                </a>
+              </li>
+              <li class="nav-item d-item">
+                <a href="/admin/product/SmartOffice" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>楼宇办公</p>
+                </a>
+              </li>
+              <li class="nav-item d-item">
+                <a href="/admin/product/SmartHealth" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>智能健康</p>
+                </a>
+              </li>
+              <li class="nav-item d-item">
+                <a href="/admin/product/SmartIndustry" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>智慧工业</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <style>
+      .d-aside{
+          padding: 1rem .5rem;
+          position: relative !important;
+      }
+      .d-item{
+        width: 100%;
+      }
+  </style>
+
+  <script>
+    $('.d-dropdown').on('click',()=>{
+      if($('.d-treeview').hasClass('menu-open')){
+        $('.d-treeview').removeClass('menu-open')
+        $('.d-dropmenu').css("display","none")
+      }else{
+        $('.d-treeview').addClass('menu-open')
+        $('.d-dropmenu').css("display","flex")
+      }
+    })
+  </script>

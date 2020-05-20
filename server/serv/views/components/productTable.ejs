@@ -1,0 +1,144 @@
+<div class="d-box">
+    <!-- TABLE: LATEST ORDERS -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title"><%= zh_type %></h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="table-responsive">
+                <table class="table no-margin">
+                    <thead>
+                        <tr>
+                            <th>产品编号</th>
+                            <th>产品名称</th>
+                            <th colspan="2">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tableBody">
+                    </tbody>
+
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer clearfix">
+        </div>
+        <!-- /.box-footer -->
+    </div>
+    <div class="pags">
+        <span id="curPag"></span>
+        <ul id="paginator" class="pagination"></ul>
+    </div>
+    <!-- /.box -->
+</div>
+
+<style>
+    .d-box {
+        padding-bottom: 5rem;
+        height: 100%;
+    }
+
+    .pags {
+        position: absolute;
+        bottom: 0;
+        height: 4rem;
+        line-height: 4rem;
+    }
+
+    .pagination {
+        padding-left: 0;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+
+    .pagination>li>a,
+    .pagination>li>span {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        line-height: 1rem;
+        text-decoration: none;
+        color: #428bca;
+        background-color: white;
+        border: 1px solid #ddd;
+        margin-left: -1px;
+    }
+
+    .pagination>li>a:hover,
+    .pagination>li>a:focus {
+        color: #fff;
+        background: #fb9400;
+        border-color: #fb9400
+    }
+
+    #curPag {
+        float: left;
+        margin-right: 1rem;
+    }
+</style>
+<script>
+    // const productUrl = 'http://localhost:3000/api/';
+    var type = '<%= type %>'
+    var pagination = {
+        offset: 0,
+        limit: 5,
+        total: '<%= total %>'
+    }
+    $("#paginator").jqPaginator({
+        totalPages: Math.ceil(+pagination.total / pagination.limit),
+        visiblePages: 5,
+        currentPage: 1,
+        first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
+        prev: '<li class="prev"><a href="javascript:void(0);"><\/i>上一页<\/a><\/li>',
+        next: '<li class="next"><a href="javascript:void(0);">下一页<\/i><\/a><\/li>',
+        last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
+        page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
+        onPageChange: function (n) {
+            $('#curPag').html('当前第' + n + '页');
+            pagination.offset = (n - 1) * pagination.limit;
+            onInitTable();
+        }
+    });
+    function onDelProduct(pId) {
+        if (confirm("产品删除后不可恢复，确认删除吗？")) {
+            $.ajax({
+                url: serverUrl + 'product/' + pId,
+                method: 'delete'
+            }).done(data => {
+                let { err, info } = data
+                if (err) {
+                    alert(info)
+                } else {
+                    onInitTable()
+                }
+            })
+        }
+    }
+    function onInitTable() {
+        $.ajax({
+            url: serverUrl + `product/${type}?offset=${pagination.offset}&limit=${pagination.limit}`,
+            method: 'get'
+        }).done(data => {
+            let { err, info } = data
+            if (!err) {
+                let products = info.data
+                $('.tableBody').empty();
+                products.forEach(item => {
+                    let tr = `<tr class='tr'>
+                            <td><${item.pId}></td>
+                            <td><${item.pName}></td>
+                            <td><a href="/admin/editproduct/${item.pId}">编辑</a></td>
+                            <td><a onclick="onDelProduct(${item.pId})">删除</a></td>
+                        </tr>`
+                    $('.tableBody').append(tr)
+                })
+                console.log(products)
+            } else {
+                alert(info)
+            }
+
+        })
+    }
+</script>

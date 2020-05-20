@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>登录</title>
+    <link rel="stylesheet" href="/stylesheets/adminlte.min.css">
+    <link rel="stylesheet" href='/stylesheets/style.css'>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body class="d-body">
+    <form class="ml-3 d-form">
+        <input id="username" class="form-control d-input" type="text" placeholder="用户名" aria-label="username">
+        <input id="password" class="form-control d-input" type="password" placeholder="密码" aria-label="password">
+        <button class="d-button" onclick="return onLogin()">登录</button>
+        <a href="/admin/logphone" class="d-link" style="margin-top:1rem">验证码登录</a>
+        <span style="margin-top: 1rem;">还没有注册，点击<a href="/admin/register" class="d-link">注册</a></span>
+    </form>
+</body>
+
+<script>
+    const serverUrl='<%= serverUrl %>'
+    const adminUrl='<%= adminUrl %>'
+    function onLogin() {
+        var user = $("#username").val();
+        var pwd = $("#password").val();
+        $.ajax({
+            url: serverUrl + 'admin/logbyname',
+            data: {
+                username: user,
+                password: pwd,
+            },
+            method: "POST",
+        }).done(data => {
+            let { err, info } = data
+            if (!err) {
+                let { sess } = info
+                alert("登录成功，即将跳转首页...")
+                window.location.href=adminUrl;
+            } else {
+                alert(info)
+            }
+
+        })
+        return false
+    }
+</script>
+
+</html>

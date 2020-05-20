@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ZHIJIA后台管理系统</title>
+  <link rel="stylesheet" href='/stylesheets/style.css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
+  <link rel="stylesheet" href="/stylesheets/all.min.css">
+  <!-- <link rel="stylesheet" href="/stylesheets/OverlayScrollbars.min.css"> -->
+  <!-- <link rel="stylesheet" href="/stylesheets/docs.css"> -->
+  <!-- <link rel="stylesheet" href="/stylesheets/highlighter.css"> -->
+  <link rel="stylesheet" href="/stylesheets/adminlte.min.css">
+  <!-- <link href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/> -->
+  <!-- <link href="http://cdn.staticfile.org/highlight.js/7.3/styles/github.min.css" rel="stylesheet" type="text/css" media="all"/> -->
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="/javascripts/jqPaginator.min.js"></script>
+</head>
+
+<body class="layout-top-nav ">
+  <%- include('./components/navbar.ejs','{admin:admin}') %>
+  <div class="d-container">
+    <%- include('./components/sidebar.ejs') %>
+    <div class="d-content">
+      <% if(admin){ %>
+      <%- include('./components/productTable.ejs',{zh_type:zh_type,type:type,total:total}) %>
+      <% }else{ %>
+      <div>您没有登录，本网站登录才能访问</div>
+      <% } %>
+    </div>
+  </div>
+</body>
+<script>
+</script>
+
+</html>

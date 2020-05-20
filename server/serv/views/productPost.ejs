@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ZHIJIA后台管理系统</title>
+    <link rel="stylesheet" href='/stylesheets/style.css'>
+    <link rel="stylesheet" href="/stylesheets/adminlte.min.css">
+    <link href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"
+        type="text/css" media="all" />
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <style>
+        .d-editor {
+            padding: 1rem 5rem;
+        }
+
+        .d-cancel {
+            margin-left: 3rem;
+        }
+    </style>
+</head>
+
+<body class="layout-top-nav ">
+    <%- include('./components/navbar.ejs','{admin:admin}') %>
+    <div class="d-container">
+        <div class="d-content">
+            <form class="form-horizontal d-editor">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="title" class="control-label">产品名称</label>
+                        <input type="email" class="form-control" id="title" placeholder="产品名称">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">产品类型</label>
+                        <select id="type" class="form-control select2" style="width: 100%;">
+                            <option selected="selected" value="SmartHome">智能家居</option>
+                            <option value="SmartCommunity">智慧社区</option>
+                            <option value="SmartOffice">楼宇办公</option>
+                            <option value="SmartHealth">智能健康</option>
+                            <option value="SmartIndustry">智慧工业</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>产品描述</label>
+                        <textarea name="editor1" id="editor1" rows="10" cols="80">
+                            填写产品描述
+                        </textarea>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="button" class="btn btn-default pull-right d-cancel" onclick="onCancel()">返回</button>
+                    <button type="button" class="btn btn-info pull-right" onclick="onSave()">保存</button>
+                </div>
+                <!-- /.box-footer -->
+            </form>
+
+        </div>
+    </div>
+</body>
+<script>
+    $(function () {
+        CKEDITOR.replace('editor1')
+    })
+    function onCancel() {
+        if (confirm('此操作将放弃当前编辑离开页面，您确定吗？')) {
+            history.go(-1);
+        }
+    }
+    function onSave() {
+        var title = $('#title').val();
+        var type = $('#type').val();
+        var desc = CKEDITOR.instances.editor1.getData()
+        $.ajax({
+            url: serverUrl + 'product/add',
+            method: 'post',
+            data: {
+                type: type,
+                pName: title,
+                detail: desc
+            }
+        }).done(data => {
+            let { err, info } = data;
+            if (err) {
+                alert(info)
+            } else {
+                history.go(-1)
+            }
+        })
+    }
+</script>
+
+</html>
