@@ -22,6 +22,7 @@ import ContractServe from '@/pages/ContractServe'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'hash',
   routes: [
     {
       path: '/',

@@ -36,7 +36,7 @@ const UserStore = {
     },
     loginByPhone ({rootState}, payload) {
       let {phone} = payload
-      let url = rootState.serverUrl + 'logbyname'
+      let url = rootState.serverUrl + 'logbyphone'
       return axios({
         method: 'post',
         url: url,

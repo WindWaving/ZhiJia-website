@@ -12,7 +12,7 @@
     <form class="ml-3 d-form">
         <input class="form-control form-control-navbar d-input" type="number" placeholder="手机号" aria-label="phone"
             name="phone" id="phone">
-        <a class="d-link">发送验证码</a>
+        <a class="d-link" onclick="sendCode()">发送验证码</a>
         <input class="form-control form-control-navbar d-input" type="number" placeholder="验证码" aria-label="authcode"
             name="authcode" id="authcode">
         <input class="form-control form-control-navbar d-input" type="text" placeholder="用户名" aria-label="username"
@@ -26,10 +26,37 @@
 <script>
     const serverUrl='<%= serverUrl %>'
     const adminUrl='<%= adminUrl %>'
+    var servercode = 0;
+    function sendCode() {
+        alert("当前服务已暂停，请使用其他信息继续注册")
+        // var phone = $("#phone").val();
+        // if(phone.length==0){
+        //     alert("请填写手机号")
+        //     return false;
+        // }
+        // $.ajax({
+        //     url: serverUrl + 'authcode',
+        //     data: {
+        //         phone: phone
+        //     },
+        //     method: 'post'
+        // }).done(data => {
+        //     let { err, info } = data
+        //     if (!err) {
+        //         servercode = info.data
+        //     } else {
+        //         alert(info)
+        //     }
+        // })
+    }
     onRegister=()=>{
         var user = $("#username").val();
         var pwd = $("#password").val();
         var phone = $('#phone').val();
+        if(user.length==0||pwd.length==0||phone.length==0){
+            alert("请填写完整信息（暂时不需要填写验证码）")
+            return false
+        }
         $.ajax({
             url: serverUrl+'admin/register',
             data: {

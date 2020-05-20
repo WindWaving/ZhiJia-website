@@ -96,7 +96,11 @@ export default {
     },
     onLogin () {
       if (this.loginWay === 'code') {
-        this.loginByPhone(this.loginForm).then(res => this.handleLogState(res))
+        this.$message({
+          message: '当前服务已暂停，请使用密码登录',
+          type: 'warn'
+        })
+        // this.loginByPhone(this.loginForm).then(res => this.handleLogState(res))
       } else {
         this.loginByName(this.loginForm).then(res => this.handleLogState(res))
       }

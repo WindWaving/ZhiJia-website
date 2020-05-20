@@ -2,6 +2,7 @@
 > 使用Vue作为前端和Koa2作为后端的企业网站个人项目
 > 包括网站和后台管理系统
 > 后台管理系统地址：[http://www.viviwind.cn:3030/admin](http://www.viviwind.cn:3030/admin)（[备用地址](http://47.99.183.205/:3030/admin)）
+> 网站地址:[http://www.viviwind.cn:8080/#/](http://www.viviwind.cn:8080/#/)（[备用地址](http://47.99.183.205:8080/#/)）
 
 ### Table of contents
 - [安装](#install)
@@ -47,6 +48,7 @@ client/entity/src/
 - server: koa2
 - database operations: sequelize & mysql2
 - encrypt password: crypto
+- message verification code：@alicloud/sms-sdk
 - admin interfaces: adminlte
 - client: vue
 - swiper: vue-concise-slider

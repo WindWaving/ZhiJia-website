@@ -148,9 +148,9 @@ router.post('/authcode',async (ctx, next) =>{
     //发送短信
     var s = await smsClient.sendSMS({
         PhoneNumbers: phone,//发送的电话号码
-        SignName: '',//认证签名
-        TemplateCode: '',//模板id
-        TemplateParam: '{"code":"'+number+'"}'//特别注意，这里的参数名
+        SignName: 'ZJ物之家',//认证签名
+        TemplateCode: 'SMS_190274442',//模板代码
+        TemplateParam: '{"code":"'+number+'"}'//参数
     })
     if(s.Code=="OK"){
         ctx.body = {

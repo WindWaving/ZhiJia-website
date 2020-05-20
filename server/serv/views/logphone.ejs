@@ -5,12 +5,13 @@
     <title>登录</title>
     <link rel="stylesheet" href="/stylesheets/adminlte.min.css">
     <link rel="stylesheet" href='/stylesheets/style.css'>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
 <body class="d-body">
     <form class="ml-3 d-form">
         <input id="phone" class="form-control d-input" type="number" placeholder="手机号" aria-label="phone">
-        <a class="d-link">发送验证码</a>
+        <a class="d-link" onclick="sendCode()">发送验证码</a>
         <input id="authcode" class="form-control d-input" type="text" placeholder="验证码" aria-label="authcode">
         <button class="d-button" onclick="return onLogin()">登录</button>
         <a href="/admin/logname" class="d-link" style="margin-top:1rem">密码登录</a>
@@ -18,28 +19,60 @@
     </form>
 </body>
 <script>
-    const serverUrl='<%= serverUrl %>'
-    const adminUrl='<%= adminUrl %>'
+    const serverUrl = '<%= serverUrl %>'
+    const adminUrl = '<%= adminUrl %>'
+    var servercode = 0;
+    function sendCode() {
+        alert("当前服务已暂停，请使用密码登录")
+        // var phone = $("#phone").val();
+        // if(phone.length==0){
+        //     alert("请填写手机号")
+        //     return false;
+        // }
+        // $.ajax({
+        //     url: serverUrl + 'authcode',
+        //     data: {
+        //         phone: phone
+        //     },
+        //     method: 'post'
+        // }).done(data => {
+        //     let { err, info } = data
+        //     if (!err) {
+        //         servercode = info.data
+        //     } else {
+        //         alert(info)
+        //     }
+        // })
+    }
     function onLogin() {
-        var phone = $("#phone").val();
-        var authcode = $("#authcode").val();
-        $.ajax({
-            url: serverUrl + 'admin/logbyphone',
-            data: {
-                phone:phone
-            },
-            method: "POST",
-        }).done(data => {
-            let { err, info } = data
-            if (!err) {
-                alert("登录成功，即将跳转首页...")
-                window.location.href = adminUrl;
-            } else {
-                alert(info)
-            }
-
-        })
+        alert("当前服务已暂停，请使用密码登录")
         return false
+        // var phone = $("#phone").val();
+        // var authcode = $("#authcode").val();
+        // if(phone.length==0||authcode.length==0){
+        //     alert("请填写手机号和验证码")
+        // }
+        // if (+authcode === +servercode) {
+        //     $.ajax({
+        //         url: serverUrl + 'admin/logbyphone',
+        //         data: {
+        //             phone: phone
+        //         },
+        //         method: "POST",
+        //     }).done(data => {
+        //         let { err, info } = data
+        //         if (!err) {
+        //             alert("登录成功，即将跳转首页...")
+        //             window.location.href = adminUrl;
+        //         } else {
+        //             alert(info)
+        //         }
+
+        //     })
+        // } else {
+        //     alert("验证码错误")
+        // }
+        // return false
     }
 </script>
 
